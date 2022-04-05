@@ -1,6 +1,5 @@
-
-<cfobject component="components.contact" name="contactPdf">
-	<cfinvoke component="#contactPdf#" method="getPdf"   userID="#Session.userID#"  returnvariable="result">
+<cfset contactObj=CreateObject("component","components.contactscript")/>
+<cfset result=contactObj.getPdf(Session.userID)/>
     <cfdocument format="PDF" filename="contact-list.pdf" overwrite="Yes"> 
         <cfdocumentsection> 
             <cfdocumentitem type="header"> 

@@ -7,17 +7,7 @@
 		<cfinclude template="common.cfm">		
 	</head> 
 	<body>
-		<cfinclude template="header.cfm">
-		<cfif structKeyExists(form,'saveForm')>
-			<cfinvoke component="components.login" method="saveUser" returnvariable="errorMessage">
-				<cfinvokeargument name="fullName"  value = "#form.fullName#" />
-				<cfinvokeargument name="emailID"  value = "#form.emailID#" />
-				<cfinvokeargument name="userName"  value = "#form.userName#" />
-				<cfinvokeargument name="password"  value = "#form.password#" />
-				<cfinvokeargument name="confirmpassword"  value = "#form.confirmpassword#" />
-			</cfinvoke>
-			
-		</cfif>
+		<cfinclude template="header.cfm">		
 		<section class="myform-area">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -38,14 +28,11 @@
 										<p><cfoutput>#variables.message#</cfoutput></p>
 									</cfloop>
 								<cfelseif isDefined('errorMessage') AND arrayIsEmpty(errorMessage)>									
-								</cfif>
-							                            
-                                <form name="signup" method="post" id="signup">
+								</cfif>                    
+                                <form name="signup" method="post" id="signup"  action="components/contactscript.cfc?method=saveUser">
 									<div class="form-group form-field">
 										<label for="fullName">Full Name<span class="required"></span></label></br>
 										<input type="text"  id="fullName" name="fullName" placeholder="Full Name">
-										
-										
 									</div>
                                     <div class="form-group form-field">
 										<label for="emailID">Email ID<span class="required"></span></label></br>
@@ -59,8 +46,7 @@
 									</div>
 									<div class="form-group form-field">
 										<label for="password">Password<span class="required"></span></label></br>
-										<input type="password" id="password" name="password"  placeholder="Password">								
-										
+										<input type="password" id="password" name="password"  placeholder="Password">									
 									</div>
                                     <div class="form-group form-field">
 										<label for="confirmpassword">Confirm Password<span class="required"></span></label></br>

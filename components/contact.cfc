@@ -24,52 +24,6 @@
         </cftry>
         <cfreturn uploadResult>
     </cffunction> 
-     <cffunction name="validateContact" hint="validate contact" access="public"   output="false">
-        <cfset  variables.title =form.title />
-        <cfset  variables.firstName =form.firstName  /> 
-        <cfset  variables.lastName  =form.lastName />
-        <cfset  variables.gender =form.gender />
-        <cfset  variables.dob =form.dob />
-        <cfset  variables.address=form.address >
-        <cfset  variables.street =form.street >
-        <cfset  variables.email =form.email >
-        <cfset  variables.phoneNumber =form.phoneNumber >
-        <cfset  variables.pincode  =form.pincode>
-        <cfset  variables.attachment  =form.attachment>
-        <cfif  variables.title EQ  "">
-            <cfset variables.result = "Please select title ">
-        </cfif>
-        <cfif  variables.firstName EQ "">
-            <cfset variables.result =  "Enter your  firstName">
-        </cfif>
-        <cfif  variables.lastName EQ "">
-            <cfset variables.result =  "Enter your  lastName">
-        </cfif>
-        <cfif  variables.gender EQ "">
-            <cfset variables.result =  "Enter your  gender">
-        </cfif>
-        <cfif  variables.dob EQ "">
-            <cfset variables.result =  "Enter your  dob">
-        </cfif>
-        <cfif  variables.address EQ "">
-            <cfset variables.result =  "Enter your  address">
-        </cfif>
-        <cfif  variables.street EQ "">
-            <cfset variables.result =  "Enter your  street">
-        </cfif>
-        <cfif  variables.email EQ "">
-            <cfset variables.result =  "Enter your  email">
-        </cfif>
-        <cfif  variables.phoneNumber EQ "">
-            <cfset variables.result =  "Enter your  phoneNumber">
-        </cfif>
-        <cfif  variables.pincode EQ "">
-            <cfset variables.result =  "Enter your  pincode">
-        </cfif>
-        <cfif  variables.result NEQ "">
-            <cfreturn variables.result>
-        </cfif>
-    </cffunction> 
     <cffunction name="insertContact" access="remote"  hint="add new contact page"  output="false"  returntype="any" returnformat="JSON">
         <cfargument name="userID" ype="numeric">
         <cfargument name="title" type="string">
@@ -132,8 +86,7 @@
                     phoneNumber=<cfqueryparam value = "#arguments.phoneNumber#" cfsqltype = "cf_sql_varchar"/>,
                     pincode=<cfqueryparam value = "#arguments.pincode#" cfsqltype = "cf_sql_integer"/>
                     where contactID= <cfqueryparam value = "#arguments.contactID#" cfsqltype = "cf_sql_integer"/>
-                </cfquery>
-                	  
+                </cfquery>      	  
             <cfelse>
                 <cfquery name = "insertContactDetails" result="res">  
                     insert into contacts(userID,title,firstName,lastName,gender,dob,attachment,address,street,email,phoneNumber,pincode)
@@ -151,8 +104,7 @@
                     ,<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.phoneNumber#"/>
                     ,<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.pincode#"/>
                     )
-                </cfquery> 
-                
+                </cfquery>       
             </cfif> 
         </cfif> 
             <cfreturn variables.errorMessage />	
@@ -250,15 +202,6 @@
             <br> 
             <cfset variables.theLink = "/cf_addressbooko/images/" & variables.f_name>
             <cfreturn variables.theLink/>   
-    </cffunction> 
-    <cffunction name="getPdf" access="remote" hint="get pdf" output="false"  >   	 
-        <cfargument name="userID" type="numeric" required="yes" >    
-            <cfquery name = "pdfData"> 
-                SELECT *
-                FROM contacts
-                where userID =<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.userID#">
-            </cfquery>
-            <cfreturn variables.pdfData/>       
     </cffunction>  
     <cffunction name="updateProfile" access="remote" hint="update profile image" output="false" >	
         <cfset variables.thisPath=expandPath('..') & '/userimage/' />

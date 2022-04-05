@@ -8,9 +8,6 @@
 		<script src="./js/account.js"></script> 
 	</head> 
 	<body>	
-	<cfif structKeyExists(form,'login')>
-		<cfinvoke component="components.login" method="validateLogin" returnvariable="errorMessage"></cfinvoke>             
-	</cfif>
 		<cfinclude template="header.cfm">
 		<cfparam name="form.userName" default=""> 
 		<cfparam name="form.password" default="">  
@@ -24,13 +21,10 @@
 							</div>
 							<div class="form-input">
 								<h2>LOGIN</h2>
-								<cfif isDefined('errorMessage') AND NOT arrayIsEmpty(errorMessage)>            
-									<cfloop array="#errorMessage#" index="message">
-										<p class="fail-alert"><cfoutput>#variables.message#</cfoutput></p>
-									</cfloop>
-								<cfelseif isDefined('errorMessage') AND arrayIsEmpty(errorMessage)>									
+								<cfif isDefined("session.errormsg")> 
+									<p class="fail-alert"><cfoutput>#session.errormsg[1]#</cfoutput></p>
 								</cfif>
-								<form name="loginForm" method="post" action="">
+								<form name="loginForm" method="post" action="components/contactscript.cfc?method=validateLogin">
 									<div class="form-group">
 										<label for="userName">User Name <span class="required"></span></label></br>
 										<input type="text"  id="userName" name="userName" placeholder="User Name">

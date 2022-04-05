@@ -39,55 +39,5 @@ $("#signup").validate({
         emailID: "Please enter a valid emailID ",
    } 
 });
-jQuery(document).ready(function(){
-    var $liveSearch = $('.usremail');
-    $("#emailID").keyup(function(){
-    var useremail = $(this).val();
-    if(useremail != ''){
-        $.ajax({
-        url: 'components/contact.cfc',
-        async: false,
-        data: 
-            { 
-                method: "searchUser",
-                emailID:useremail},
-                success: function(data) {
-                    if (data==true) {              
-                    } 
-                    else {
-                        var msg = 'This Email id alredy existing in our system'
-                        $liveSearch.css('display','block').html(msg);
-                    }                    
-                }
-         });
-        } 
-    });
-
-});
-jQuery(document).ready(function(){
-    var $liveSearch = $('.usrvalid');
-    $("#userName").keyup(function(){
-    var userName = $(this).val();
-    if(userName != ''){
-        $.ajax({
-        url: 'components/contact.cfc',
-        async: false,
-        data: 
-            { 
-                method: "searchUserName",
-                userName:userName},
-                success: function(data) {
-                    if (data==true) {              
-                    } 
-                    else {
-                        var msg = 'This User Name  alredy existing in our system'
-                        $liveSearch.css('display','block').html(msg);
-                    }                    
-                }
-         });
-        } 
-    });
-
-});
 
 
